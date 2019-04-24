@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GrepConsole">
+    <option name="pinnedGrepConsolesState">
+      <PinnedGrepConsolesState>
+        <option name="map">
+          <map>
+            <entry>
+              <key>
+                <RunConfigurationRef>
+                  <option name="icon" value="tomcat.svg" />
+                  <option name="name" value="Tomcat 9.0.19" />
+                </RunConfigurationRef>
+              </key>
+              <value>
+                <Pins>
+                  <option name="pins">
+                    <list>
+                      <Pin>
+                        <option name="consoleUUID" value="d3d84104-bff1-4ba7-83ba-ca605a0641a1" />
+                        <option name="contentType" value="ConsoleContent" />
+                        <option name="grepModel">
+                          <GrepModel>
+                            <option name="expression" value=".WebappClassLoaderBase.clearReferencesThreads The web application [o2o] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:" />
+                            <option name="unlessExpression" value="" />
+                          </GrepModel>
+                        </option>
+                      </Pin>
+                    </list>
+                  </option>
+                </Pins>
+              </value>
+            </entry>
+          </map>
+        </option>
+      </PinnedGrepConsolesState>
+    </option>
+  </component>
+</project>
