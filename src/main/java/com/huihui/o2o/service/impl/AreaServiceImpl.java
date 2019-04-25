@@ -12,7 +12,7 @@ import java.util.List;
  * service层
  */
 @Service
-public class AreaSericeImpl implements AreaService {
+public class AreaServiceImpl implements AreaService {
     //依赖于dao层 自动注入
     @Autowired
     private AreaDao areaDao;

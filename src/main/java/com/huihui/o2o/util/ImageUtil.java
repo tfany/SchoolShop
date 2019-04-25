@@ -1,14 +1,12 @@
 package com.huihui.o2o.util;
 
 import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Position;
 import net.coobird.thumbnailator.geometry.Positions;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -18,7 +16,7 @@ public class ImageUtil {
     private static final SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random random=new Random();
 
-    public static String genetateThumbnail(CommonsMultipartFile thumbnail, String targetAddr) {
+    public static String generateThumbnail(CommonsMultipartFile thumbnail, String targetAddr) {
         String realFileName = getRandomFileName();
         String extension = getFileExtension(thumbnail);
         makeDirPath(targetAddr);
@@ -39,6 +37,10 @@ public class ImageUtil {
      * @param targetAddr
      */
 
+    /**
+     * 创建存放店铺图片的位置
+     * @param targetAddr 传入的相对路径
+     */
     private static void makeDirPath(String targetAddr) {
         String realFileParentPath = PathUtil.getImgBasePath()+targetAddr;
         File dirPath=new File(realFileParentPath);
