@@ -1,10 +1,13 @@
 package com.huihui.o2o.pojo;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 public class ShopCategory {
 
 	private Long shopCategoryId;
