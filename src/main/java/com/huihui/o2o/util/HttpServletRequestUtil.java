@@ -2,7 +2,11 @@ package com.huihui.o2o.util;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 获取用户请求参数的各种方法
+ */
 public class HttpServletRequestUtil {
+
     public static int getInt(HttpServletRequest request,String key){
         try{
             return Integer.decode(request.getParameter(key));

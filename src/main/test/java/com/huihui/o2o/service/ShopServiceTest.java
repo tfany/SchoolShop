@@ -5,6 +5,7 @@ import com.huihui.o2o.dto.ShopExecution;
 import com.huihui.o2o.pojo.Area;
 import com.huihui.o2o.pojo.Shop;
 import com.huihui.o2o.pojo.ShopCategory;
+import com.huihui.o2o.util.FileToMult;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -21,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -49,26 +51,25 @@ public class ShopServiceTest extends BaseTest {
         shop.setAdvice("审核中");
         shop.setArea(area);
         shop.setShopCategory(sc);
-        File file = new File("c:\\Users\\huige\\Pictures\\gg.jpg");
 
-        FileItem fileItem = new DiskFileItem(
-                "formFieldName",//form表单文件控件的名字随便起
-                Files.probeContentType(file.toPath()),//文件类型
-                false, //是否是表单字段
-                file.getName(),//原始文件名
-                (int) file.length(),//Interger的最大值可以存储两部1G的电影
-                file.getParentFile());//文件会在哪个目录创建
-
-        //最关键的一步：为DiskFileItem的OutputStream赋值
-        //IOUtils是org.apache.commons.io.IOUtils;
-        //与此类似的还有FileUtils
-        IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
-
-        CommonsMultipartFile cMultiFile = new CommonsMultipartFile(fileItem);
-        System.out.println(cMultiFile.getOriginalFilename());
-
-        ShopExecution se = shopService.addShop(shop, cMultiFile);
+        ShopExecution se = shopService.addShop(shop, FileToMult.change("c:\\Users\\huige\\Pictures\\gg.jpg"));
         assertEquals("mytest1", se.getShop().getShopName());
     }
+
+    @Test
+    public void testModifyShop() throws IOException {
+        Shop shop=shopService.getShopByShopId(37L);
+        shop.setShopName("怕怕");
+        shopService.modifyShop(shop, FileToMult.change("c:\\Users\\huige\\Pictures\\gg.jpg"));
+    }
+
+    @Test
+    public void testQueryList(){
+        Shop shop=new Shop();
+        shop.setOwnerId(8L);
+        ShopExecution execution =shopService.getShopList(shop,1,5);
+        System.out.println(execution.getCount());
+    }
+
 
 }

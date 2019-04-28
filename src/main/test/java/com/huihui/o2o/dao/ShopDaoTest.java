@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +17,7 @@ public class ShopDaoTest extends BaseTest {
     private ShopDao shopDao;
 
     @Test
-    public void insertShop(){
+    public void insertShop() {
         Shop shop = new Shop();
         shop.setOwnerId(9L);
         Area area = new Area();
@@ -43,22 +44,45 @@ public class ShopDaoTest extends BaseTest {
     }
 
     @Test
-    public void updateShop(){
-            Shop shop = new Shop();
-            shop.setOwnerId(9L);
-            shop.setShopId(28L);
-            shop.setShopName("芳芳的店铺");
-            shop.setShopDesc("奶茶店哟");
-            shop.setShopAddr("不知道");
-            shop.setPhone("13810524526");
-            shop.setShopImg("xxxx");
-            shop.setLongitude(1D);
-            shop.setLatitude(1D);
-            shop.setCreateTime(new Date());
-            shop.setLastEditTime(new Date());
-            shop.setEnableStatus(0);
-            shop.setAdvice("审核中");
-            int effectedNum = shopDao.updateShop(shop);
-            assertEquals(1, effectedNum);
-        }
+    public void updateShop() {
+        Shop shop = new Shop();
+        shop.setOwnerId(9L);
+        shop.setShopId(28L);
+        shop.setShopName("芳芳的店铺");
+        shop.setShopDesc("奶茶店哟");
+        shop.setShopAddr("不知道");
+        shop.setPhone("13810524526");
+        shop.setShopImg("xxxx");
+        shop.setLongitude(1D);
+        shop.setLatitude(1D);
+        shop.setCreateTime(new Date());
+        shop.setLastEditTime(new Date());
+        shop.setEnableStatus(0);
+        shop.setAdvice("审核中");
+        int effectedNum = shopDao.updateShop(shop);
+        assertEquals(1, effectedNum);
+    }
+
+    @Test
+    public void testShopQueyr() {
+        Shop shop = new Shop();
+        shop = shopDao.queryByShopId(15L);
+        long num = shop.getShopId();
+        int num1 = (int) num;
+        assertEquals(15, num1);
+
+    }
+
+    @Test
+    public void testQueryListAndCount() {
+        Shop shop=new Shop();
+        shop.setOwnerId(8L);
+        List<Shop> shopList=shopDao.queryShopList(shop,0,10);
+        int sum=shopDao.queryShopCount(shop);
+        System.out.println(sum);
+        System.out.println(shopList.size());
+    }
+
+
+
 }

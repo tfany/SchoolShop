@@ -31,12 +31,6 @@ public class ImageUtil {
         }
         return relativeAddr;
     }
-
-    /**
-     * 创建目标路径所涉及到的目录 即 e:/schoolshop/images/xxx.jsp
-     * @param targetAddr
-     */
-
     /**
      * 创建存放店铺图片的位置
      * @param targetAddr 传入的相对路径
