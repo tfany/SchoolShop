@@ -217,17 +217,18 @@ public class ShopManagementController {
      * @param request 用户请求
      * @return json数据
      */
-    @RequestMapping(value = "/shoplist",method = RequestMethod.POST)
+    @RequestMapping(value = "/getshoplist",method = RequestMethod.POST)
     @ResponseBody
     private Map<String,Object> getShopList(HttpServletRequest request){
         Map<String,Object> modelMap=new HashMap<>();
         PersonInfo user=new PersonInfo();
-        user.setUserId(8L);
+        user.setUserId(9L);
         user.setName("同学");
         request.getSession().setAttribute("user",user);
         PersonInfo personInfo= (PersonInfo) request.getSession().getAttribute("user");
         Shop shop=new Shop();
         shop.setOwnerId(personInfo.getUserId());
+        request.getSession().setAttribute("currentShop",shop);
         List<Shop> shopList;
         try {
             ShopExecution execution = shopService.getShopList(shop, 0, 100);
@@ -242,7 +243,7 @@ public class ShopManagementController {
         return modelMap;
     }
 
-    @RequestMapping(value = "/getShopManagementInfo",method = RequestMethod.POST)
+    @RequestMapping(value = "/getShopManagementInfo",method = RequestMethod.GET)
     @ResponseBody
     private Map<String,Object> getShopManagementInfo(HttpServletRequest request){
         Map<String,Object> modelMap=new HashMap<>();

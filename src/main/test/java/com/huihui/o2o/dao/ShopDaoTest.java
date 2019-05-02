@@ -77,7 +77,7 @@ public class ShopDaoTest extends BaseTest {
     public void testQueryListAndCount() {
         Shop shop=new Shop();
         shop.setOwnerId(8L);
-        List<Shop> shopList=shopDao.queryShopList(shop,0,10);
+        List<Shop> shopList=shopDao.queryShopList(shop,0,20);
         int sum=shopDao.queryShopCount(shop);
         System.out.println(sum);
         System.out.println(shopList.size());

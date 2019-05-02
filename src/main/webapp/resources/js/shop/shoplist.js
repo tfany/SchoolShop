@@ -2,7 +2,7 @@ $(function () {
 
 	function getlist(e) {
 		$.ajax({
-			url : "/o2o/shop/shoplist",
+			url : "/o2o/shop/getshoplist",
 			type : "POST",
 			dataType : "json",
 			success : function(data) {

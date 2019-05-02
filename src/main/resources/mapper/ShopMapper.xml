@@ -91,6 +91,9 @@
                 and shop_category_id =
                 #{shopCondition.shopCategory.shopCategoryId}
             </if>
+            <if test="shopCondition.ownerId!=null">
+                and owner_id=#{shopCondition.ownerId}
+            </if>
             <if
                     test="shopCondition.parentCategory!=null
 				 and shopCondition.parentCategory.shopCategoryId!=null">
