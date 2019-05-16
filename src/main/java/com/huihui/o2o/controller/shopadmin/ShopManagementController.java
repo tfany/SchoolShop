@@ -39,6 +39,7 @@ public class ShopManagementController {
 
     /**
      * 获取店铺信息
+     *
      * @param request
      * @return
      */
@@ -50,10 +51,10 @@ public class ShopManagementController {
         if (shopId > 0) {
             Shop shop = shopService.getShopByShopId(shopId);
             List<Area> areaList = areaService.getAreaList();
-            List<ShopCategory> shopCategoryList=shopCategoryService.getShopCategoryService(new ShopCategory());
+            List<ShopCategory> shopCategoryList = shopCategoryService.getShopCategoryService(new ShopCategory());
             modelMap.put("shop", shop);
             modelMap.put("areaList", areaList);
-            modelMap.put("CategoryList",shopCategoryList);
+            modelMap.put("CategoryList", shopCategoryList);
             modelMap.put("success", true);
         } else {
             modelMap.put("success", false);
@@ -100,7 +101,7 @@ public class ShopManagementController {
         //1.接收并转换相应的参数 包括店铺信息以及图片信息
         String s = request.getParameter("shopStr");
         Map<String, Object> modelMap = new HashMap<>();
-        if (!CodeUtil.cheakVerifyCode(request)) {
+        if (!CodeUtil.checkVerifyCode(request)) {
             modelMap.put("success", false);
             modelMap.put("errMsg", "验证码错误");
             return modelMap;
@@ -166,7 +167,7 @@ public class ShopManagementController {
         //1.接收并转换相应的参数 包括店铺信息以及图片信息
         String s = request.getParameter("shopStr");
         Map<String, Object> modelMap = new HashMap<>();
-        if (!CodeUtil.cheakVerifyCode(request)) {
+        if (!CodeUtil.checkVerifyCode(request)) {
             modelMap.put("success", false);
             modelMap.put("errMsg", "验证码错误");
             return modelMap;
@@ -214,52 +215,55 @@ public class ShopManagementController {
 
     /**
      * 获取分页列表数据
+     *
      * @param request 用户请求
      * @return json数据
      */
-    @RequestMapping(value = "/getshoplist",method = RequestMethod.POST)
+    @RequestMapping(value = "/getshoplist", method = RequestMethod.POST)
     @ResponseBody
-    private Map<String,Object> getShopList(HttpServletRequest request){
-        Map<String,Object> modelMap=new HashMap<>();
-        PersonInfo user=new PersonInfo();
-        user.setUserId(9L);
+    private Map<String, Object> getShopList(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<>();
+        PersonInfo user = new PersonInfo();
+        user.setUserId(8L);
         user.setName("同学");
-        request.getSession().setAttribute("user",user);
-        PersonInfo personInfo= (PersonInfo) request.getSession().getAttribute("user");
-        Shop shop=new Shop();
+        request.getSession().setAttribute("user", user);
+        PersonInfo personInfo = (PersonInfo) request.getSession().getAttribute("user");
+        Shop shop = new Shop();
         shop.setOwnerId(personInfo.getUserId());
-        request.getSession().setAttribute("currentShop",shop);
         List<Shop> shopList;
         try {
             ShopExecution execution = shopService.getShopList(shop, 0, 100);
             shopList = execution.getShopList();
-            modelMap.put("shopList",shopList);
-            modelMap.put("user",user);
-            modelMap.put("success",true);
-        }catch (Exception e){
-            modelMap.put("success",false);
-            modelMap.put("essMsg",e.getMessage());
+            modelMap.put("shopList", shopList);
+            modelMap.put("user", user);
+            modelMap.put("success", true);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("essMsg", e.getMessage());
         }
         return modelMap;
     }
 
-    @RequestMapping(value = "/getShopManagementInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/getshopmanagementinfo", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String,Object> getShopManagementInfo(HttpServletRequest request){
-        Map<String,Object> modelMap=new HashMap<>();
-        Long shopId=HttpServletRequestUtil.getLong(request,"shopId");
-        if(shopId<=0){
-            Object currentShopObj=request.getSession().getAttribute("currentShop");
-            if(currentShopObj==null){
-                modelMap.put("redirect",true);
-                modelMap.put("url","/o2o/shop/shoplist");
-            }else{
-                Shop currentShop=new Shop();
-                currentShop.setShopId(shopId);
-                request.getSession().setAttribute("currentShop",currentShop);
-                modelMap.put("redirect",false);
-            }
+    private Map<String, Object> getShopManagementInfo(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<>();
+        Long shopId = HttpServletRequestUtil.getLong(request, "shopId");
+        if (shopId <= 0) {
+            modelMap.put("redirect", false);
+            return modelMap;
         }
+        Object currentShopObj = request.getSession().getAttribute("currentShop");
+        if (currentShopObj != null) {
+            modelMap.put("redirect", true);
+            modelMap.put("url", "/o2o/shop/shoplist");
+        } else {
+            Shop currentShop = new Shop();
+            currentShop.setShopId(shopId);
+            request.getSession().setAttribute("currentShop", currentShop);
+            modelMap.put("redirect", false);
+        }
+
         return modelMap;
     }
 }

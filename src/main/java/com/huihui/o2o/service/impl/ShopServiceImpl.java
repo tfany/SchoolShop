@@ -37,7 +37,7 @@ public class ShopServiceImpl implements ShopService {
         }else {
             //1.判断是否需要更换图片
             if(shopImg!=null){
-                PathUtil.deleteFileOrPath(shop.getShopImg());
+                PathUtil.deleteFile(shop.getShopImg());
                 addShopImg(shop,shopImg);
             }
             //2.更新店铺信息

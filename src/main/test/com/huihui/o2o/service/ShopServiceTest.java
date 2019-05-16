@@ -6,23 +6,11 @@ import com.huihui.o2o.pojo.Area;
 import com.huihui.o2o.pojo.Shop;
 import com.huihui.o2o.pojo.ShopCategory;
 import com.huihui.o2o.util.FileToMult;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,8 +26,8 @@ public class ShopServiceTest extends BaseTest {
         area.setAreaId(4L);
         ShopCategory sc = new ShopCategory();
         sc.setShopCategoryId(14L);
-        shop.setShopName("mytest1");
-        shop.setShopDesc("mytest1");
+        shop.setShopName("mytest2");
+        shop.setShopDesc("mytest2");
         shop.setShopAddr("testaddr1");
         shop.setPhone("13810524526");
         shop.setShopImg("test1");
@@ -52,15 +40,15 @@ public class ShopServiceTest extends BaseTest {
         shop.setArea(area);
         shop.setShopCategory(sc);
 
-        ShopExecution se = shopService.addShop(shop, FileToMult.change("c:\\Users\\huige\\Pictures\\gg.jpg"));
-        assertEquals("mytest1", se.getShop().getShopName());
+        ShopExecution se = shopService.addShop(shop, FileToMult.getCommonsMult("c:\\Users\\huige\\Pictures\\gg.jpg"));
+        assertEquals("mytest2", se.getShop().getShopName());
     }
 
     @Test
     public void testModifyShop() throws IOException {
         Shop shop=shopService.getShopByShopId(37L);
         shop.setShopName("怕怕");
-        shopService.modifyShop(shop, FileToMult.change("c:\\Users\\huige\\Pictures\\gg.jpg"));
+        shopService.modifyShop(shop, FileToMult.getCommonsMult("c:\\Users\\huige\\Pictures\\gg.jpg"));
     }
 
     @Test

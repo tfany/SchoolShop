@@ -20,7 +20,7 @@ public class PathUtil {
         return basePath;
     }
 
-    public static void deleteFileOrPath(String storePath){
+    public static void deleteFile(String storePath){
         File fileOrPath=new File(PathUtil.getImgBasePath()+storePath.substring(1));
         if(fileOrPath.exists()){
             if(fileOrPath.isDirectory()){

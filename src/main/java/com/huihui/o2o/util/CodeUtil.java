@@ -8,7 +8,7 @@ public class CodeUtil {
      * @param request 用户请求
      * @return bool
      */
-    public static boolean cheakVerifyCode(HttpServletRequest request) {
+    public static boolean checkVerifyCode(HttpServletRequest request) {
         String verifyCodeExpected = (String) request.getSession().getAttribute(
                 com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         String verifyCodeActual=HttpServletRequestUtil.getString(request,"verifyCodeActual");

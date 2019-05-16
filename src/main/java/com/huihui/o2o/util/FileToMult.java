@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class FileToMult {
-    public static CommonsMultipartFile change(String name) throws IOException {
+    public static CommonsMultipartFile getCommonsMult(String name) throws IOException {
         File file = new File(name);
         FileItem fileItem = new DiskFileItem(
                 "formFieldName",//form表单文件控件的名字随便起

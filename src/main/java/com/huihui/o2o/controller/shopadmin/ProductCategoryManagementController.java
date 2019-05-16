@@ -28,8 +28,7 @@ public class ProductCategoryManagementController {
     @RequestMapping(value = "/getproductcategorylist")
     @ResponseBody
     private Result<List<ProductCategory>> getProductCategoryList(HttpServletRequest request){
-        Shop currentShop=new Shop();
-        currentShop.setShopId(20L);
+        Shop currentShop= (Shop) request.getSession().getAttribute("currentShop");
         List<ProductCategory> list;
         if(currentShop != null){
             list=productCategoryService.getProductCategoryList(currentShop.getShopId());
@@ -45,9 +44,10 @@ public class ProductCategoryManagementController {
     private Map<String, Object> addProductCategorys(
             @RequestBody List<ProductCategory> productCategoryList,
             HttpServletRequest request) {
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-        Shop currentShop = (Shop) request.getSession().getAttribute(
-                "currentShop");
+        Map<String, Object> modelMap = new HashMap<>();
+        Shop currentShop = new Shop();
+        currentShop.setShopId(20L);
+
         for (ProductCategory pc : productCategoryList) {
             pc.setShopId(currentShop.getShopId());
         }

@@ -2,7 +2,6 @@ package com.huihui.o2o.dao;
 
 import com.huihui.o2o.BaseTest;
 import com.huihui.o2o.pojo.Area;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
