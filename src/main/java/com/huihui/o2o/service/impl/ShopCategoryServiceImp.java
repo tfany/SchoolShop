@@ -13,7 +13,7 @@ public class ShopCategoryServiceImp implements ShopCategoryService {
     @Autowired
     private ShopCategoryDao shopCategoryDao;
     @Override
-    public List<ShopCategory> getShopCategoryService(ShopCategory shopCategory) {
+    public List<ShopCategory> getShopCategoryList(ShopCategory shopCategory) {
         return shopCategoryDao.queryShopCategory(shopCategory);
     }
 }

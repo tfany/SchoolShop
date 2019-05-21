@@ -51,7 +51,7 @@ public class ShopManagementController {
         if (shopId > 0) {
             Shop shop = shopService.getShopByShopId(shopId);
             List<Area> areaList = areaService.getAreaList();
-            List<ShopCategory> shopCategoryList = shopCategoryService.getShopCategoryService(new ShopCategory());
+            List<ShopCategory> shopCategoryList = shopCategoryService.getShopCategoryList(new ShopCategory());
             modelMap.put("shop", shop);
             modelMap.put("areaList", areaList);
             modelMap.put("CategoryList", shopCategoryList);
@@ -76,7 +76,7 @@ public class ShopManagementController {
         List<Area> areaList = new ArrayList<>();
         try {
             shopCategoryList = shopCategoryService
-                    .getShopCategoryService(new ShopCategory());
+                    .getShopCategoryList(new ShopCategory());
             areaList = areaService.getAreaList();
         } catch (Exception e) {
             modelMap.put("success", false);

@@ -9,7 +9,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class ShopCategory {
-
 	private Long shopCategoryId;
 	private String shopCategoryName;
 	private String shopCategoryDesc;
